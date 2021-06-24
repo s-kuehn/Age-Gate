@@ -1,0 +1,106 @@
+html, body {
+    background-color: bisque;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+/* ------ AGE MODAL STYLING BELOW ------ */
+
+.modal-container {
+    /* display: none; */
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+
+    -webkit-transition: opacity 0.6s ease-in;
+    -moz-transition: opacity 0.6s ease-in;
+    -ms-transition: opacity 0.6s ease-in;
+    -o-transition: opacity 0.6s ease-in;
+    transition: opacity 0.6s ease-in;
+}
+
+.modal-container.load {
+    opacity: 1;
+}
+
+.modal {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 20px 40px;
+    width: 600px;
+    max-width: 100%;
+    margin-bottom: 65px;
+}
+
+.modal h1 {
+    margin: 0;
+}
+
+.modal p {
+    opacity: 0.7;
+    font-size: 16px;
+}
+
+
+/* ------ BIRTHDAY INPUT STYLE ------ */
+
+.birthday-input ::-webkit-input-placeholder {
+    text-align: center;
+ }
+ 
+ .birthday-input :-moz-placeholder { /* Firefox 18- */
+    text-align: center;  
+ }
+ 
+ .birthday-input ::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;  
+ }
+ 
+ .birthday-input :-ms-input-placeholder {  
+    text-align: center; 
+ }
+
+.birthday-input input::-webkit-outer-spin-button,
+.birthday-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.birthday-input input[type=number]{
+    -moz-appearance: textfield;
+}
+
+.birthday-input input{
+    text-align: center;
+}
+
+.birthday-input #day, .birthday-input #month {
+     width: 35px;
+}
+
+.birthday-input #year {
+     width: 60px;
+}
+
+
+.modal .remember-container {
+    margin: 15px 0;
+}
+
+.modal button {
+    background-color: #47a386;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 25px;
+}

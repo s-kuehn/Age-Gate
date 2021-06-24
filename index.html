@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beer Garden</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <div class="modal-container">
+        <div class="modal">
+            <h1>Welcome to Beer Garden!</h1>
+            <h2>Age Verification</h2>
+            <p>You must be 21 or older to visit this website. 
+                Please verify your date of birth below.</p>
+            
+            <div class="birthday-input">
+                <input id="month" type="number" placeholder="MM" min="01" max="12"
+                maxlength="2" required autofocus>
+
+                <input id="day" type="number" placeholder="DD" min="01" max="31"
+                maxlength="2" required>
+                
+                <input id="year" type="number" placeholder="YYYY" min="1900"
+                maxlength="4" required>
+            </div>
+
+            <div class="remember-container">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Remember me.</label>
+            </div>
+
+            <button type="submit" class="submit-button">Submit</button>
+
+        </div>
+    </div>
+    
+    <script src="./app.js"></script>
+</body>
+</html>
