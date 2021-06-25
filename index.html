@@ -4,17 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beer Garden</title>
+    <title>Casino Delfino</title>
 
+    <link rel="icon" type="image/png" href="./img/mario-favicon.png"/>
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
-    <div class="modal-container">
+    <header class="navbar">
+        <div class="logo">Casino Delfino</div>
+
+        <a class="toggle-button" href="#">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </a>
+
+        <nav class="nav-links">
+            <ul>
+                <li><a href="#">Games</a></li>
+                <li><a href="#">VIP</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="login" href="#">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <div class="hero">
+        <div class="content">
+            <h1>Have Fun<br><span>Win Big!</span></h1>
+            <p>Super Mario platform pipe red shell slide jump side-scrolling radio frequency modulator koopa paratroopa select button Luigi,
+                warp zone sprite! Mario Bros bottomless pit Luigi. Warp zone time cheep cheep 1-up super Mario fireball. Lava blooper life Japan?
+                Fire bar green shell cheep cheep B-button time warp zone spiny invincible Mario.</p>
+            <button class="action-button">PLAY NOW!</button>
+        </div>
+        <div class="hero-image"></div>
+    </div>
+
+
+    <div class="modal-container hide">
         <div class="modal">
-            <h1>Welcome to Beer Garden!</h1>
-            <h2>Age Verification</h2>
-            <p>You must be 21 or older to visit this website. 
+            <h1 id="modal-h1">Welcome to Casino Delfino</h1>
+            <h2 id="modal-h2">Age Verification</h2>
+            <p id="modal-p">You must be 21 or older to visit this website. 
                 Please verify your date of birth below.</p>
             
             <div class="birthday-input">

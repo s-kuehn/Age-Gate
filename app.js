@@ -1,7 +1,16 @@
 // Initialize DOM elements
+const toggleButton = document.querySelector('.toggle-button');
+const navBarLinks = document.querySelector('.nav-links');
+const navbar = document.querySelector('.navbar');
+const heroImageContainer = document.querySelector('.hero');
 const modalContainer = document.querySelector('.modal-container');
 const modalSubmitBtn = document.querySelector('.submit-button');
 const modalRememberBx = document.querySelector('#remember');
+const modalBirthdayInput = document.querySelector('.birthday-input')
+const modalRememberContainer = document.querySelector('.remember-container');
+const modalH1 = document.querySelector('#modal-h1');
+const modalH2 = document.querySelector('#modal-h2');
+const modalP = document.querySelector('#modal-p');
 const dayInput = document.querySelector('#day');
 const monthInput = document.querySelector('#month');
 const yearInput = document.querySelector('#year');
@@ -11,12 +20,79 @@ const dateInputs = [monthInput, dayInput, yearInput, modalSubmitBtn];
 
 // Get current date
 const curDate = new Date();
-const curMonth = curDate.getMonth()+1;
+const curMonth = curDate.getMonth() + 1;
 const curDay = curDate.getDate();
 const curYear = curDate.getFullYear();
 
 
-modalContainer.classList.add('load');
+// Navbar hamburger button
+toggleButton.addEventListener('click', () => {
+    navBarLinks.classList.toggle('active');
+    navBarLinks.classList.toggle('drop-down')
+    heroImageContainer.classList.toggle('hero-menu-active');
+});
+
+// Redirect user
+function redirect() {
+    setTimeout(()=>{
+        window.location.replace("https://google.com");
+    }, 2000);
+}
+
+// Enter site and remove modal
+function enterSite() {
+
+    // Store rememberValue in local storage
+    if (modalRememberBx.checked) {
+        const rememberValue = true;
+        localStorage.setItem('rememberVal', rememberValue);
+    }
+
+    setTimeout(()=>{
+        modalContainer.classList.remove('load');
+        setTimeout(()=>{
+            modalContainer.classList.add('hide');
+        }, 800);
+    }, 1400);
+}
+
+// Change modal to under age site message
+function underAgeEvent() {
+    modalSubmitBtn.classList.add('hide');
+    modalRememberContainer.classList.add('hide');
+    modalP.classList.add('hide');
+    modalBirthdayInput.classList.add('hide');
+    modalH1.innerHTML = 'You are under age.';
+    modalH2.innerHTML = 'You will now be redirected.';
+}
+
+// Change modal to enter site message
+function ofAgeEvent() {
+    modalSubmitBtn.classList.add('hide');
+    modalRememberContainer.classList.add('hide');
+    modalP.classList.add('hide');
+    modalBirthdayInput.classList.add('hide');
+    modalH2.classList.add('hide');
+}
+
+// Change modal to birthday message
+function birthdayEvent() {
+    modalSubmitBtn.classList.add('hide');
+    modalRememberContainer.classList.add('hide');
+    modalP.classList.add('hide');
+    modalBirthdayInput.classList.add('hide');
+    modalH2.innerHTML = birthdayMessage(calculateAge());
+}
+
+// Change modal to birthday message under age
+function birthdayRedirectEvent() {
+    modalSubmitBtn.classList.add('hide');
+    modalRememberContainer.classList.add('hide');
+    modalP.classList.add('hide');
+    modalBirthdayInput.classList.add('hide');
+    modalH1.innerHTML = `${birthdayMessage(calculateAge())} However, you are underage.`;
+    modalH2.innerHTML = 'You will now be redirected.';
+}
 
 // Formats user input
 function formatDate(inputBox) {
@@ -29,8 +105,8 @@ function formatDate(inputBox) {
 
 function checkInput() {
     // Arrays with all months containing 30 and 31 days
-    const monthsWith31Days = [1,3,5,7,8,10,12];
-    const monthsWith30Days = [4,6,9,11]
+    const monthsWith31Days = [1, 3, 5, 7, 8, 10, 12];
+    const monthsWith30Days = [4, 6, 9, 11];
     // Return value
     let errorFree = false;
 
@@ -61,7 +137,7 @@ function checkInput() {
     if (monthInput.value >= 1 && monthInput.value <= 12) {
 
         if (monthsWith31Days.includes(Number(monthInput.value))) {
-            if (dayInput.value <= 31 && dayInput.value !== '') {
+            if (dayInput.value >= 1 && dayInput.value <= 31 && dayInput.value !== '') {
                 checkYearInput();
             } else if (dayInput.value === '') {
                 alert('Must enter a value in the day input box.');
@@ -71,7 +147,7 @@ function checkInput() {
             }
 
         } else if (monthsWith30Days.includes(Number(monthInput.value))) {
-            if (dayInput.value <= 30 && dayInput.value !== '') {
+            if (dayInput.value >= 1 && dayInput.value <= 30 && dayInput.value !== '') {
                 checkYearInput();
             } else if (dayInput.value === '') {
                 alert('Must enter a value in the day input box.');
@@ -80,7 +156,7 @@ function checkInput() {
                 alert('Must enter a valid day.');
             }
         } else if (Number(monthInput.value) === 2 && isLeapYear(yearInput.value)) {
-            if (dayInput.value <= 29 && dayInput.value !== '') {
+            if (dayInput.value >= 1 && dayInput.value <= 29 && dayInput.value !== '') {
                 checkYearInput();
             } else if (dayInput.value === '') {
                 alert('Must enter a value in the day input box.');
@@ -89,7 +165,7 @@ function checkInput() {
                 alert('Must enter a valid day.');
             }
         } else if (Number(monthInput.value) === 2) {
-            if (dayInput.value <= 28 && dayInput.value !== '') {
+            if (dayInput.value >= 1 && dayInput.value <= 28 && dayInput.value !== '') {
                 checkYearInput();
             } else if (dayInput.value === '') {
                 alert('Must enter a value in the day input box.');
@@ -147,6 +223,19 @@ function checkBirthday() {
 }
 
 
+// Create custom birthday message based on user's age
+function birthdayMessage(userAge) {
+    const ageLastDigit = userAge % 10;
+    const year = ["st", "nd", "rd", "th"]
+
+    if (ageLastDigit > 0 && ageLastDigit < 4) {
+        return `Happy ${userAge}${year[ageLastDigit-1]} Birthday!`;
+    } else {
+        return `Happy ${userAge}${year[3]} Birthday!`;
+    }
+}
+
+
 // Adds extra 0 infront of days and months
 formatDate(monthInput);
 formatDate(dayInput);
@@ -163,24 +252,43 @@ for (let i = 0; i < dateInputs.length; i++) {
     });
 }
 
-// On modal submission code
-modalSubmitBtn.addEventListener('click', ()=> {
-    
-    if (checkInput()) {
-        // Check if user is 21 and check for birthday
-        if (checkBirthday() && calculateAge() >= 21) {
-            console.log(`HAPPY BIRTHDAY!!! ENTER SITE!!!`);
-        } else if (checkBirthday() && calculateAge() < 21) {
-            console.log(`HAPPY BIRTHDAY!!! REDIRECT USER!!!`);
-        } else if (calculateAge() >= 21) {
-            console.log(`ENTER SITE!!!`);
-        } else {
-            console.log(`REDIRECT USER!!!`);
+// Check if user previously selected remember me option
+if(!localStorage.getItem('rememberVal')) {
+
+    // Fade in on load
+    modalContainer.classList.remove('hide');
+    setTimeout(()=>{
+        modalContainer.classList.add('load');
+    }, 150);
+
+    // On modal submission code
+    modalSubmitBtn.addEventListener('click', ()=> {
+
+        if (checkInput()) {
+
+            // If today is user's b-day and if they are of age
+            if (checkBirthday() && calculateAge() >= 21) {
+                birthdayEvent();
+                enterSite();
+
+            // If today is user's b-day and if they are under age
+            } else if (checkBirthday() && calculateAge() < 21) {
+                birthdayRedirectEvent()
+                redirect();
+
+            // If user is of age
+            } else if (calculateAge() >= 21) {
+                ofAgeEvent();
+                enterSite();
+
+            // If user is under age
+            } else {
+                underAgeEvent();
+                redirect();
+            }
+
         }
 
+    });
 
-        // Check if user selected remember me option
-        console.log(`Remember me is ${modalRememberBx.checked}`)
-    }
-
-});
+}
