@@ -1,12 +1,3 @@
-/* COLOR SCHEME
-#38DFFA
-#E8FA38
-#4BF048
-#FF8655
-#FFE355
-#44DCD2
-*/
-
 html, body {
     background-color: #38DFFA;
     font-family: Arial, Helvetica, sans-serif;
@@ -21,13 +12,6 @@ html, body {
 
 
 /* ------ HERO IMG ------ */
-/* .hero {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-} */
-
 .hero {
     background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(./img/casino-delfino.jpg) no-repeat center;
     background-size: cover;
@@ -36,20 +20,10 @@ html, body {
     position: inherit;
 }
 
-/* .hero-image {
-    width: 600px;
-    height: 500px;
-    background: url(./img/casino-delfino-cutout.png) no-repeat center;
-    background-size: contain;
-    background-position: left;
-    margin-right: 80px;
-} */
-
 .content {
     text-align: center;
     max-width: 650px;
     margin: 60px 100px;
-    /* margin-right: 10px; */
     display: inline-block;
 }
 
@@ -125,7 +99,6 @@ li, a{
     justify-content: space-between;
     align-items: center;
     padding: 25px 10%;
-    /* padding: 0; */
     margin: 0;
     background-color:  rgba(0, 0, 0, 0);
 }
@@ -202,7 +175,6 @@ li, a{
     .navbar {
         flex-direction: column;
         align-items: flex-start;
-        /* padding-bottom: 10px; */
     }
 
     .nav-links ul{
@@ -220,8 +192,8 @@ li, a{
     }
 }
 
-/* ------ AGE MODAL STYLING BELOW ------ */
 
+/* ------ AGE MODAL STYLING BELOW ------ */
 .modal-container {
     opacity: 0;
     background-color: rgba(0, 0, 0, 0.3);
@@ -272,7 +244,6 @@ li, a{
 
 
 /* ------ BIRTHDAY INPUT STYLE ------ */
-
 .birthday-input ::-webkit-input-placeholder {
     text-align: center;
     color: #fff;
@@ -322,11 +293,9 @@ li, a{
 }
 
 .modal button {
-    /* background-color: rgba(0, 0, 0, 0); */
     background-color: #f92f00;
     border-color: #fff;
     border-radius: 3px;
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
     color: #fff;
     font-size: 14px;
     padding: 10px 25px;

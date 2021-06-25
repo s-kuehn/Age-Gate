@@ -1,8 +1,16 @@
+'use strict';
+
 // Initialize DOM elements
+
+// Navbar elements
 const toggleButton = document.querySelector('.toggle-button');
 const navBarLinks = document.querySelector('.nav-links');
 const navbar = document.querySelector('.navbar');
+
+// Hero Image
 const heroImageContainer = document.querySelector('.hero');
+
+// Modal elements
 const modalContainer = document.querySelector('.modal-container');
 const modalSubmitBtn = document.querySelector('.submit-button');
 const modalRememberBx = document.querySelector('#remember');
@@ -11,6 +19,8 @@ const modalRememberContainer = document.querySelector('.remember-container');
 const modalH1 = document.querySelector('#modal-h1');
 const modalH2 = document.querySelector('#modal-h2');
 const modalP = document.querySelector('#modal-p');
+
+// User input elements
 const dayInput = document.querySelector('#day');
 const monthInput = document.querySelector('#month');
 const yearInput = document.querySelector('#year');
@@ -48,6 +58,7 @@ function enterSite() {
         localStorage.setItem('rememberVal', rememberValue);
     }
 
+    // Fadeout and hide modal
     setTimeout(()=>{
         modalContainer.classList.remove('load');
         setTimeout(()=>{
@@ -94,7 +105,7 @@ function birthdayRedirectEvent() {
     modalH2.innerHTML = 'You will now be redirected.';
 }
 
-// Formats user input
+// Formats user input (Adds 0s infront of single digits)
 function formatDate(inputBox) {
     inputBox.addEventListener('focusout', ()=> {
         if (inputBox.value.toString().length === 1) {
@@ -134,8 +145,10 @@ function checkInput() {
     }
 
 
+    // Checks if month input is valid
     if (monthInput.value >= 1 && monthInput.value <= 12) {
 
+        // Checks for correct day input if month should have a max of 31 days
         if (monthsWith31Days.includes(Number(monthInput.value))) {
             if (dayInput.value >= 1 && dayInput.value <= 31 && dayInput.value !== '') {
                 checkYearInput();
@@ -146,6 +159,7 @@ function checkInput() {
                 alert('Must enter a valid day.');
             }
 
+        // Checks for correct day input if month should have a max of 30 days
         } else if (monthsWith30Days.includes(Number(monthInput.value))) {
             if (dayInput.value >= 1 && dayInput.value <= 30 && dayInput.value !== '') {
                 checkYearInput();
@@ -155,6 +169,8 @@ function checkInput() {
             } else {
                 alert('Must enter a valid day.');
             }
+
+        // Checks for correct day input if month should have a max of 29 days due to a leap year
         } else if (Number(monthInput.value) === 2 && isLeapYear(yearInput.value)) {
             if (dayInput.value >= 1 && dayInput.value <= 29 && dayInput.value !== '') {
                 checkYearInput();
@@ -164,6 +180,8 @@ function checkInput() {
             } else {
                 alert('Must enter a valid day.');
             }
+
+        // Checks for correct day input if month should have a max of 28 days
         } else if (Number(monthInput.value) === 2) {
             if (dayInput.value >= 1 && dayInput.value <= 28 && dayInput.value !== '') {
                 checkYearInput();
@@ -175,6 +193,7 @@ function checkInput() {
             }
         }
 
+    // Check for no value in the month input
     } else if (monthInput.value === '') {
         alert('Must enter a value in the month input box.');
 
@@ -182,6 +201,7 @@ function checkInput() {
         alert('Must enter a valid month.');
     }
 
+    // Return if valid or invalid
     return errorFree;
 }
 
@@ -226,12 +246,13 @@ function checkBirthday() {
 // Create custom birthday message based on user's age
 function birthdayMessage(userAge) {
     const ageLastDigit = userAge % 10;
-    const year = ["st", "nd", "rd", "th"]
+    const yearSuffix = ["st", "nd", "rd", "th"]
 
+    // Assign yearSuffix endings to bday message
     if (ageLastDigit > 0 && ageLastDigit < 4) {
-        return `Happy ${userAge}${year[ageLastDigit-1]} Birthday!`;
+        return `Happy ${userAge}${yearSuffix[ageLastDigit-1]} Birthday!`;
     } else {
-        return `Happy ${userAge}${year[3]} Birthday!`;
+        return `Happy ${userAge}${yearSuffix[3]} Birthday!`;
     }
 }
 
@@ -288,7 +309,5 @@ if(!localStorage.getItem('rememberVal')) {
             }
 
         }
-
     });
-
 }
